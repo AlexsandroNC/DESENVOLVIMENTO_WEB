@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Notas dos Alunos</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #eef2f3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      width: 100%;
+      max-width: 500px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      margin-top: 10px;
+      border-radius: 5px;
+    }
+
+    button {
+      background-color: #27ae60;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #1e8449;
+    }
+
+    .resultado {
+      margin-top: 20px;
+    }
+
+    .aluno {
+      margin: 10px 0;
+      padding: 10px;
+      background-color: #f4f4f4;
+      border-left: 5px solid #3498db;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Notas dos Alunos</h1>
+    <input type="text" id="nomeAluno" placeholder="Nome do aluno">
+    <input type="number" id="notaAluno" placeholder="Nota do aluno (0 a 10)" min="0" max="10">
+    <button onclick="adicionarNota()">Adicionar Nota</button>
+
+    <div class="resultado" id="resultadoNotas"></div>
+  </div>
+
+  <script>
+    let notasAlunos = {
+      "Ana": 8,
+      "Carlos": 5,
+      "Julia": 9
+    };
+
+    function exibirNotas() {
+      const resultado = document.getElementById("resultadoNotas");
+      resultado.innerHTML = "";
+
+      for (let nome in notasAlunos) {
+        let nota = notasAlunos[nome];
+        let status = nota >= 6 ? "Aprovado ✅" : "Reprovado ❌";
+
+        const alunoDiv = document.createElement("div");
+        alunoDiv.className = "aluno";
+        alunoDiv.textContent = `${nome}: Nota ${nota} - ${status}`;
+        resultado.appendChild(alunoDiv);
+      }
+    }
+
+    function adicionarNota() {
+      const nome = document.getElementById("nomeAluno").value.trim();
+      const nota = parseFloat(document.getElementById("notaAluno").value);
+
+      if (!nome || isNaN(nota) || nota < 0 || nota > 10) {
+        alert("Preencha corretamente o nome e uma nota válida (0 a 10).");
+        return;
+      }
+
+      notasAlunos[nome] = nota;
+      document.getElementById("nomeAluno").value = "";
+      document.getElementById("notaAluno").value = "";
+      exibirNotas();
+    }
+
+    window.onload = function() {
+      exibirNotas();
+    };
+  </script>
+</body>
+</html>
