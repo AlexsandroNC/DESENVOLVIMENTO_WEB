@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>estrutura_repeticao</title>
+
+        <style>
+        * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f0f8ff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #2c3e50;
+      margin-bottom: 20px;
+    }
+
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      width: 100%;
+    }
+
+    button {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    ul {
+      list-style-type: square;
+      padding-left: 20px;
+      text-align: left;
+      margin-top: 20px;
+    }
+
+    li {
+      margin: 5px 0;
+    }
+    </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Lista de Frutas</h1>
+    <input type="text" id="novaFruta" placeholder="Digite uma fruta">
+    <button onclick="adicionarFruta()">Adicionar</button>
+
+    <ul id="listaFrutas"></ul>
+  </div>
+
+  <script>
+    
+    let frutas = ["Maçã", "Banana", "Laranja"];
+
+    function exibirFrutas() {
+      const lista = document.getElementById("listaFrutas");
+      lista.innerHTML = ""; 
+
+      frutas.forEach(function(fruta) {
+        const item = document.createElement("li");
+        item.textContent = fruta;
+        lista.appendChild(item);
+      });
+    }
+
+    function adicionarFruta() {
+      const input = document.getElementById("novaFruta");
+      const nova = input.value.trim();
+
+      if (nova) {
+        frutas.push(nova);
+        input.value = "";
+        exibirFrutas(); 
+      } else {
+        alert("Digite o nome de uma fruta.");
+      }
+    }
+
+    window.onload = function() {
+      exibirFrutas();
+
+      console.log("Frutas (com for):");
+      for (let i = 0; i < frutas.length; i++) {
+        console.log(frutas[i]);
+      }
+    };
+  </script> 
+</body>
+</html>
